@@ -13,9 +13,13 @@ type Attendance struct {
 	CiDate    time.Time       `json:"ci_date"`
 	CiType    AttendanceType  `gorm:"type:enum('wfa','wfo');defaul:'wfa'" json:"ci_type"`
 	CiFoto    string          `json:"ci_foto"`
+	CiLat     float64         `json:"ci_lat"`
+	CiLon     float64         `json:"ci_lon"`
 	CoDate    *time.Time      `json:"co_date"`
 	CoType    *AttendanceType `gorm:"type:enum('wfa','wfo');defaul:'wfa'" json:"co_type"`
 	CoFoto    *string         `json:"co_foto"`
+	CoLat     float64         `json:"co_lat"`
+	CoLon     float64         `json:"co_lon"`
 	CreatedAt time.Time       `json:"created_at"`
 	UpdatedAt time.Time       `json:"updated_at"`
 }
