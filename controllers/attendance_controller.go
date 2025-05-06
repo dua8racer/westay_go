@@ -12,8 +12,7 @@ import (
 
 func StoreAttendance(c *gin.Context) {
 	var existingAttendance models.Attendance
-	var attendace models.Attendance
-	if err := c.ShouldBindJSON(&attendace); err != nil {
+	if err := c.ShouldBindJSON(&existingAttendance); err != nil {
 		c.JSON(http.StatusBadRequest, models.AttendanceError{
 			Status:  http.StatusBadRequest,
 			Message: err.Error(),
@@ -38,7 +37,7 @@ func StoreAttendance(c *gin.Context) {
 	}
 
 	// Jika sudah check-out hari ini, kembalikan error
-	if !existingAttendance.CoDate.IsZero() {
+	if existingAttendance.CoDate != nil {
 		c.JSON(http.StatusForbidden, models.AttendanceError{
 			Status:  http.StatusForbidden,
 			Message: "You have already checked in and out today",
